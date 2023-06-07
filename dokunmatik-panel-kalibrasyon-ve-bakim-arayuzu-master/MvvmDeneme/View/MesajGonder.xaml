@@ -1,0 +1,81 @@
+﻿<Window x:Class="MvvmDeneme.View.MesajGonder"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MvvmDeneme.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="MESAJ GÖNDER" Height="406" Width="578" Icon="diagnostic-tool.png">
+    <Grid Background="#FF5B7098">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="103*"/>
+            <RowDefinition Height="316*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <ComboBox
+                SelectedItem="{Binding SelectedIps, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ItemsSource="{Binding Path=Ips}"
+                x:Name="ipComboBox"
+                Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                materialDesign:HintAssist.Hint="IP ADRESİ"
+                Background="#FFF0F4F3" Height="50" Margin="51,16,330,26">
+            </ComboBox>
+            <TextBox
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                x:Name="portTextBox"
+                Text="{Binding PortSelect, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                materialDesign:HintAssist.Hint="PORT"
+                materialDesign:HintAssist.HelperText="Port Sayısını Giriniz" 
+                Margin="269,16,161,26" RenderTransformOrigin="0.5,0.5" Background="#FFF0F4F3">
+                <!--<TextBox.Text>
+                    <Binding
+                    Path="Name"
+                    UpdateSourceTrigger="PropertyChanged">
+                    </Binding>
+                </TextBox.Text>!-->
+            </TextBox>
+            <Button
+                Command="{Binding TcpbaglaButton}"
+                x:Name="Bagla"
+                Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                Content="{materialDesign:PackIcon Kind=Connection}"
+                ToolTip="TCP Bağlantısı Kur"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
+                Height="Auto" Margin="443,16,45,26" Width="Auto" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="223*"/>
+                <ColumnDefinition Width="62*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox
+                Text="{Binding MesajTextBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                x:Name="mesajTextBox"
+                Style="{StaticResource MaterialDesignFilledTextBox}"
+                materialDesign:HintAssist.Hint="Mesajınızı Giriniz...."
+                materialDesign:HintAssist.HelperText="Bağlantıyı Sonlardırmak İçin exit"
+                VerticalScrollBarVisibility="Visible"
+                TextWrapping="Wrap"
+                AcceptsReturn="True"
+                Margin="51,16,37,26" RenderTransformOrigin="0.5,0.5" Background="#FFF0F4F3">
+                <!--<TextBox.Text>
+                    <Binding
+                        Path="Name"
+                        UpdateSourceTrigger="PropertyChanged">
+                    </Binding>
+                </TextBox.Text>!-->
+            </TextBox>
+            <Button
+                Command="{Binding MesajgonderButton}"
+                x:Name="mesajGonderButton"
+                Background="#FF90CAF9"
+                BorderBrush="#FF90CAF9"
+                Style="{StaticResource MaterialDesignFlatAccentBgButton}"
+                Content="{materialDesign:PackIcon Kind=Send}"
+                ToolTip="Gönder"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
+                Height="Auto" Margin="441,92,30,110" Width="Auto" Grid.ColumnSpan="2" />
+        </Grid>
+    </Grid>
+</Window>
